@@ -1,4 +1,4 @@
-from scipy.spatial.distance import euclidean
+from scipy.spatial.distance import euclidean 
 import pandas as pd
 import random
 
@@ -25,9 +25,10 @@ def calculate_distances(df):
         'wrist_ring2': [],
         'wrist_ring3': [],
 
+        'wrist_pinky0': [],
         'wrist_pinky1': [],
         'wrist_pinky2': [],
-        'wrist_pinky3': [],
+        'wrist_pinky3': []
         
     }
     
@@ -50,6 +51,7 @@ def calculate_distances(df):
         ring2_pos = [row['b_l_ring2_Position_X'], row['b_l_ring2_Position_Y'], row['b_l_ring2_Position_Z']]
         ring3_pos = [row['b_l_ring3_Position_X'], row['b_l_ring3_Position_Y'], row['b_l_ring3_Position_Z']]
 
+        pinky0_pos = [row['b_l_pinky0_Position_X'], row['b_l_pinky0_Position_Y'], row['b_l_pinky0_Position_Z']]
         pinky1_pos = [row['b_l_pinky1_Position_X'], row['b_l_pinky1_Position_Y'], row['b_l_pinky1_Position_Z']]
         pinky2_pos = [row['b_l_pinky2_Position_X'], row['b_l_pinky2_Position_Y'], row['b_l_pinky2_Position_Z']]
         pinky3_pos = [row['b_l_pinky3_Position_X'], row['b_l_pinky3_Position_Y'], row['b_l_pinky3_Position_Z']]
@@ -71,6 +73,7 @@ def calculate_distances(df):
         distances['wrist_ring2'].append(euclidean(wrist_pos, ring2_pos))
         distances['wrist_ring3'].append(euclidean(wrist_pos, ring3_pos))
 
+        distances['wrist_pinky0'].append(euclidean(wrist_pos, pinky0_pos))
         distances['wrist_pinky1'].append(euclidean(wrist_pos, pinky1_pos))
         distances['wrist_pinky2'].append(euclidean(wrist_pos, pinky2_pos))
         distances['wrist_pinky3'].append(euclidean(wrist_pos, pinky3_pos))
@@ -84,4 +87,5 @@ distances_df['Sign']=df['label']
 shuffled_df = distances_df.sample(frac=1)
 
 print(shuffled_df)
-shuffled_df.to_csv('calculate_shuffle_distance_bones.csv',index=False)
+shuffled_df.to_csv('calculate_not_shuffle_distance_bones.csv',index=False)
+print(shuffled_df.columns)
